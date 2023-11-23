@@ -34,14 +34,13 @@ function Header({
 
   return (
     <>
-      <header style={{ height: headerHeight }}>
+      <header class="h-[53px] lg:h-[58px]">
         <Drawers
           menu={{ items }}
           searchbar={searchbar}
           platform={platform}
         >
           <div class="bg-base-100 fixed w-full z-50">
-            <Alert alerts={alerts} />
             <Navbar
               items={items}
               searchbar={searchbar && { ...searchbar, platform }}

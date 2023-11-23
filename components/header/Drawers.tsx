@@ -12,6 +12,10 @@ import { lazy, Suspense } from "preact/compat";
 const Menu = lazy(() => import("$store/components/header/Menu.tsx"));
 const Searchbar = lazy(() => import("$store/components/search/Searchbar.tsx"));
 
+const MENU_TITLE = "Menu";
+const SEARCH_TITLE = "Buscar";
+const MINICART_TITLE = "Sacola"
+
 export interface Props {
   menu: MenuProps;
   searchbar?: SearchbarProps;
@@ -22,6 +26,33 @@ export interface Props {
   platform: ReturnType<typeof usePlatform>;
 }
 
+const HeaderLogin = (props: any) => {
+  const {title, closeFunction: { onClose } } = props;
+  // Validar
+  const isUserLoggedIn = true;
+
+  return (
+    <div class="flex justify-between items-center bg-black p-4">
+      <a
+        class="flex items-center gap-x-2 text-white fill-white"
+        href={ isUserLoggedIn ? "/account" : "/login" }
+        aria-label="Log in"
+      >
+        <svg id="_01_align_center" data-name="01 align center" xmlns="http://www.w3.org/2000/svg" width="13.989" height="18.652" viewBox="0 0 13.989 18.652">
+          <path id="Caminho_10" data-name="Caminho 10" d="M16.989,21.772H15.434V17.852a2.3,2.3,0,0,0-2.3-2.3H6.852a2.3,2.3,0,0,0-2.3,2.3v3.919H3V17.852A3.857,3.857,0,0,1,6.852,14h6.284a3.857,3.857,0,0,1,3.852,3.852Z" transform="translate(-3 -3.12)"/>
+          <path id="Caminho_11" data-name="Caminho 11" d="M10.663,9.326a4.663,4.663,0,1,1,4.663-4.663A4.663,4.663,0,0,1,10.663,9.326Zm0-7.772a3.109,3.109,0,1,0,3.109,3.109A3.109,3.109,0,0,0,10.663,1.554Z" transform="translate(-3.669)"/>
+        </svg>
+        <span class="block truncate text-sm max-w-[200px]">{ isUserLoggedIn ? "Olá, sergioluizfrancajunior@gmail.com" : "Entrar" }</span>
+      </a>
+      {onClose && (
+        <button class="py-3 text-white" onClick={onClose}>
+          <Icon id="XMark" size={24} strokeWidth={2} />
+        </button>
+      )}
+    </div>
+  )
+}
+
 const Aside = (
   { title, onClose, children }: {
     title: string;
@@ -29,17 +60,8 @@ const Aside = (
     children: ComponentChildren;
   },
 ) => (
-  <div class="bg-base-100 grid grid-rows-[auto_1fr] h-full divide-y max-w-[100vw]">
-    <div class="flex justify-between items-center">
-      <h1 class="px-4 py-3">
-        <span class="font-medium text-2xl">{title}</span>
-      </h1>
-      {onClose && (
-        <Button class="btn btn-ghost" onClick={onClose}>
-          <Icon id="XMark" size={24} strokeWidth={2} />
-        </Button>
-      )}
-    </div>
+  <div class="bg-base-100 grid grid-rows-[auto_1fr] h-full max-w-[100vw]">
+    { title === MENU_TITLE && <HeaderLogin title={title} closeFunction={{onClose}} /> }
     <Suspense
       fallback={
         <div class="w-screen flex items-center justify-center">
@@ -68,7 +90,7 @@ function Drawers({ menu, searchbar, children, platform }: Props) {
             displayMenu.value = false;
             displaySearchDrawer.value = false;
           }}
-          title={displayMenu.value ? "Menu" : "Buscar"}
+          title={displayMenu.value ?  MENU_TITLE : SEARCH_TITLE}
         >
           {displayMenu.value && <Menu {...menu} />}
           {searchbar && displaySearchDrawer.value && (
@@ -85,7 +107,7 @@ function Drawers({ menu, searchbar, children, platform }: Props) {
         onClose={() => displayCart.value = false}
         aside={
           <Aside
-            title="Minha sacola"
+            title={MINICART_TITLE}
             onClose={() => displayCart.value = false}
           >
             <Cart platform={platform} />

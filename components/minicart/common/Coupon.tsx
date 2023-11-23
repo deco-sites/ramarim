@@ -12,8 +12,8 @@ function Coupon({ coupon, onAddCoupon }: Props) {
 
   return (
     <div class="flex justify-between items-center px-4">
-      <span class="text-sm">Cupom de desconto</span>
-      {display
+      <span class="text-sm uppercase text-black">Cupom de desconto</span>
+      {display || !coupon
         ? (
           <form
             class="join"
@@ -37,19 +37,19 @@ function Coupon({ coupon, onAddCoupon }: Props) {
           >
             <input
               name="coupon"
-              class="input join-item"
+              class="border border-black rounded-none outline-none w-32 text-xs p-2 join-item placeholder:text-gray-700 placeholder:uppercase"
               type="text"
               value={coupon ?? ""}
-              placeholder={"Cupom"}
+              placeholder={"Insira o cupom"}
             />
-            <Button
-              class="join-item"
+            <button
+              class="border border-black bg-black rounded-none outline-none text-white text-xs uppercase p-2 join-item"
               type="submit"
               htmlFor="coupon"
               loading={loading}
             >
-              Ok
-            </Button>
+              Adicionar
+            </button>
           </form>
         )
         : (

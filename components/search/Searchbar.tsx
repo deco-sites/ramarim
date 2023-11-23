@@ -21,6 +21,7 @@ import { Suggestion } from "apps/commerce/types.ts";
 import { Resolved } from "deco/engine/core/resolver.ts";
 import { useEffect, useRef } from "preact/compat";
 import type { Platform } from "$store/apps/site.ts";
+import Image from "apps/website/components/Image.tsx";
 
 // Editable props
 export interface Props {
@@ -53,7 +54,7 @@ export interface Props {
 }
 
 function Searchbar({
-  placeholder = "What are you looking for?",
+  placeholder = "O que você procura?",
   action = "/s",
   name = "q",
   loader,
@@ -78,22 +79,16 @@ function Searchbar({
       class="w-full grid gap-8 px-4 py-6 overflow-y-hidden"
       style={{ gridTemplateRows: "min-content auto" }}
     >
-      <form id={id} action={action} class="join">
-        <Button
-          type="submit"
-          class="join-item btn-square"
-          aria-label="Search"
-          for={id}
-          tabIndex={-1}
-        >
+      <form id={id} action={action} class="relative join">
+        <span class="block absolute top-1/2 left-3 translate-y-[-50%]">
           {loading.value
             ? <span class="loading loading-spinner loading-xs" />
             : <Icon id="MagnifyingGlass" size={24} strokeWidth={0.01} />}
-        </Button>
+        </span>
         <input
           ref={searchInputRef}
           id="search-input"
-          class="input input-bordered join-item flex-grow"
+          class="flex flex-grow outline-none border-none rounded-none pl-10 py-2 pr-4 bg-base-200 placeholder:text-black text-sm"
           name={name}
           onInput={(e) => {
             const value = e.currentTarget.value;
@@ -112,67 +107,75 @@ function Searchbar({
           aria-controls="search-suggestion"
           autocomplete="off"
         />
-        <Button
-          type="button"
-          class="join-item btn-ghost btn-square hidden sm:inline-flex"
+        <button
+          class="hidden sm:inline-flex items-center h-full px-3"
           onClick={() => displaySearchPopup.value = false}
         >
           <Icon id="XMark" size={24} strokeWidth={2} />
-        </Button>
+        </button>
       </form>
 
       <div
         class={`overflow-y-scroll ${!hasProducts && !hasTerms ? "hidden" : ""}`}
       >
-        <div class="gap-4 grid grid-cols-1 sm:grid-rows-1 sm:grid-cols-[150px_1fr]">
-          <div class="flex flex-col gap-6">
-            <span
-              class="font-medium text-xl"
-              role="heading"
-              aria-level={3}
-            >
-              Sugestões
-            </span>
-            <ul id="search-suggestion" class="flex flex-col gap-6">
-              {searches.map(({ term }) => (
-                <li>
-                  <a href={`/s?q=${term}`} class="flex gap-4 items-center">
-                    <span>
-                      <Icon
-                        id="MagnifyingGlass"
-                        size={24}
-                        strokeWidth={0.01}
-                      />
-                    </span>
-                    <span dangerouslySetInnerHTML={{ __html: term }} />
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div class="flex flex-col pt-6 md:pt-0 gap-6 overflow-x-hidden">
-            <span
-              class="font-medium text-xl"
-              role="heading"
-              aria-level={3}
-            >
-              Produtos sugeridos
-            </span>
-            <Slider class="carousel">
-              {products.map((product, index) => (
-                <Slider.Item
-                  index={index}
-                  class="carousel-item first:ml-4 last:mr-4 min-w-[200px] max-w-[200px]"
+        <div class="gap-4 flex flex-col sm:flex-row">
+          {
+            searches.length > 0 ? (
+              <div class="flex flex-col gap-6">
+                <span
+                  class="font-medium text-xl"
+                  role="heading"
+                  aria-level={3}
                 >
-                  <ProductCard
-                    product={product}
-                    platform={platform}
-                    index={index}
-                  />
-                </Slider.Item>
-              ))}
-            </Slider>
-          </div>
+                  Sugestões
+                </span>
+                <ul id="search-suggestion" class="flex flex-col gap-6">
+                  {searches.map(({ term }) => (
+                    <li>
+                      <a href={`/s?q=${term}`} class="flex gap-4 items-center">
+                        <span>
+                          <Icon
+                            id="MagnifyingGlass"
+                            size={24}
+                            strokeWidth={0.01}
+                          />
+                        </span>
+                        <span dangerouslySetInnerHTML={{ __html: term }} />
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ) : null
+          }
+          {
+            products.length > 0 ? (
+              <div class="flex flex-col pt-6 md:pt-0 gap-6 overflow-x-hidden">
+                <span
+                  class="font-normal text-lg uppercase"
+                  role="heading"
+                  aria-level={3}
+                >
+                  Produtos sugeridos
+                </span>
+                <div class="flex flex-col gap-y-4">
+                  {products.map((product, index) => (
+                    <a class="flex items-center gap-x-6" href={product.url}>
+                      <Image
+                        src={product.image[0].url!}
+                        alt={product.image[0].name}
+                        width={115}
+                        height={96}
+                        loading="lazy"
+                        decoding="async"
+                      />
+                      <span class="text-sm">{product.isVariantOf.name}</span>
+                    </a>
+                  ))}
+                </div>
+              </div>
+            ) : null
+          }
         </div>
       </div>
     </div>

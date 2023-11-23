@@ -26,6 +26,16 @@
     overflow: hidden;
     height: 100vh;
   }
+
+  .container {
+    margin: 0 auto;
+    padding: 0 15px;
+    max-width: 100%;
+    @screen lg {
+      padding: 0 30px;
+      max-width: 1270px;
+    }
+  }
 }
 
 .group:disabled .group-disabled\:animate-progress {

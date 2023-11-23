@@ -6,24 +6,16 @@ import { useId } from "$store/sdk/useId.ts";
 import type { ImageWidget } from "apps/admin/widgets.ts";
 import { Picture, Source } from "apps/website/components/Picture.tsx";
 
-/**
- * @titleBy alt
- */
 export interface Banner {
-  /** @description desktop otimized image */
   desktop: ImageWidget;
-  /** @description mobile otimized image */
   mobile: ImageWidget;
-  /** @description Image's alt text */
   alt: string;
+  theme?: "light" | "dark";
+  position?: "left" | "right";
   action?: {
-    /** @description when user clicks on the image, go to this link */
     href: string;
-    /** @description Image text title */
     title: string;
-    /** @description Image text subtitle */
     subTitle: string;
-    /** @description Button label */
     label: string;
   };
 }
@@ -89,10 +81,21 @@ const DEFAULT_PROPS = {
 function BannerItem({ image, lcp }: { image: Banner; lcp?: boolean }) {
   const {
     alt,
+    theme,
     mobile,
+    position,
     desktop,
     action,
   } = image;
+
+  const isDarkTheme = !theme ? false : theme === "light" ? false : true;
+  const isLeftPosition = !position ? true : position === "right" ? true : false;
+
+  const darkButton = "flex items-center gap-x-2 border py-2 px-8 border-black uppercase text-black hover:text-white max-sm:text-white hover:bg-black max-sm:bg-black";
+  const lightButton = "flex items-center gap-x-2 border py-2 px-8 border-white uppercase text-white hover:text-black max-sm:text-black hover:bg-white max-sm:bg-white";
+
+  const leftBox = "flex flex-col items-center sm:items-start w-80 absolute max-sm:bottom-0 sm:top-1/2 max-sm:translate-x-[-50%] sm:translate-y-[-50%] left-1/2 sm:left-28 gap-y-3 sm:gap-y-5 py-5 max-sm:pb-12 max-sm:mb-4";
+  const rightBox = "flex flex-col items-center sm:items-end w-80 absolute max-sm:bottom-0 sm:top-1/2 max-sm:translate-x-[-50%] sm:translate-y-[-50%] right-1/2 sm:right-28 gap-y-3 sm:gap-y-5 py-5 max-sm:pb-12 max-sm:mb-4";
 
   return (
     <a
@@ -123,14 +126,22 @@ function BannerItem({ image, lcp }: { image: Banner; lcp?: boolean }) {
         />
       </Picture>
       {action && (
-        <div class="absolute h-min top-0 bottom-0 m-auto left-0 right-0 sm:right-auto sm:left-[12%] max-h-min max-w-[235px] flex flex-col gap-4 p-4 rounded glass">
-          <span class="text-6xl font-medium text-base-100">
+        <div class={isLeftPosition ? leftBox : rightBox}>
+          <span class={isDarkTheme ? "text-dark text-4xl" : "text-white text-4xl"}>
             {action.title}
           </span>
-          <span class="font-medium text-xl text-base-100">
+          <span class={isDarkTheme ? "text-dark" : "text-white"}>
             {action.subTitle}
           </span>
-          <Button class="glass">{action.label}</Button>
+          <button class={isDarkTheme ? darkButton : lightButton}>
+            {action.label}
+            <Icon
+              class={isDarkTheme ? "text-dark" : "text-white"}
+              size={20}
+              id="ChevronRight"
+              strokeWidth={3}
+            />
+          </button>
         </div>
       )}
     </a>
@@ -173,22 +184,22 @@ function Buttons() {
   return (
     <>
       <div class="flex items-center justify-center z-10 col-start-1 row-start-2">
-        <Slider.PrevButton class="btn btn-circle glass">
+        <Slider.PrevButton class="flex items-center justify-center border-2 border-white w-11 h-11 rounded-full bg-gray-500/25">
           <Icon
             class="text-base-100"
-            size={24}
+            size={22}
             id="ChevronLeft"
-            strokeWidth={3}
+            strokeWidth={2}
           />
         </Slider.PrevButton>
       </div>
       <div class="flex items-center justify-center z-10 col-start-3 row-start-2">
-        <Slider.NextButton class="btn btn-circle glass">
+        <Slider.NextButton class="flex items-center justify-center border-2 border-white w-11 h-11 rounded-full bg-gray-500/25">
           <Icon
             class="text-base-100"
-            size={24}
+            size={22}
             id="ChevronRight"
-            strokeWidth={3}
+            strokeWidth={2}
           />
         </Slider.NextButton>
       </div>
@@ -216,7 +227,7 @@ function BannerCarousel(props: Props) {
 
       <Buttons />
 
-      <Dots images={images} interval={interval} />
+      {/* <Dots images={images} interval={interval} /> */}
 
       <SliderJS rootId={id} interval={interval && interval * 1e3} infinite />
     </div>

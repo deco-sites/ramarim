@@ -1,0 +1,58 @@
+.banner-box {
+    top: 50%;
+    gap: 15px;
+    left: 130px;
+    display: flex;
+    position: absolute;
+    transform: translateY(-50%);
+    align-items: flex-start;
+    flex-direction: column;
+}
+
+.banner-box .banner-box-title {
+    color: #000;
+    font-size: 40px;
+    line-height: 1;
+}
+
+.banner-box.light .banner-box-title {
+    color: #fff;
+}
+
+.banner-box .banner-box-subtitle {
+    color: #000;
+    font-size: 18px;
+}
+
+.banner-box.light .banner-box-subtitle {
+    color: #fff;
+}
+
+.banner-box .banner-box-cta {
+    border: 1px solid #000;
+    padding: 5px 50px;
+    font-size: 16px;
+    border-radius: 100px;
+    text-transform: uppercase;
+}
+
+.banner-box.dark .banner-box-cta {
+    font-size: 16px;
+    border-color: #000;
+    border-radius: 100px;
+}
+
+.banner-box.light .banner-box-cta {
+    color: #fff;
+    font-size: 16px;
+    border-color: #fff;
+    border-radius: 100px;
+}
+
+.banner-box .banner-box-cta:hover,
+.banner-box.dark .banner-box-cta:hover,
+.banner-box.light .banner-box-cta:hover {
+    color: #000;
+    border-color: #fff;
+    background-color: #fff;
+}
