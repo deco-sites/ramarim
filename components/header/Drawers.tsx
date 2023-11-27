@@ -27,7 +27,7 @@ export interface Props {
 }
 
 const HeaderLogin = (props: any) => {
-  const {title, closeFunction: { onClose } } = props;
+  const {closeFunction: { onClose } } = props;
   // Validar
   const isUserLoggedIn = true;
 
@@ -53,6 +53,43 @@ const HeaderLogin = (props: any) => {
   )
 }
 
+const SearchHeader = (props: any) => {
+  const {closeFunction: { onClose } } = props;
+
+  return (
+    <div class="flex justify-between items-center bg-black px-4">
+      <div class="flex items-center gap-x-2 text-white fill-white text-sm">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18.677" height="18.677" viewBox="0 0 18.677 18.677">
+          <path id="Caminho_29" data-name="Caminho 29" d="M18.645,17.546l-4.867-4.867a7.784,7.784,0,1,0-1.1,1.1l4.867,4.867ZM7.764,13.982a6.217,6.217,0,1,1,6.217-6.217,6.217,6.217,0,0,1-6.217,6.217Z" transform="translate(0.032 0.032)"/>
+        </svg>
+        Buscar
+      </div>
+      {onClose && (
+        <button class="py-3 text-white" onClick={onClose}>
+          <Icon id="XMark" size={24} strokeWidth={2} />
+        </button>
+      )}
+    </div>
+  )
+}
+
+const MinicartHeader = (props: any) => {
+  const {closeFunction: { onClose } } = props;
+
+  return (
+    <div class="flex justify-between items-center p-4">
+      <div class="flex items-center text-lg text-black uppercase font-medium">
+        Sacola
+      </div>
+      {onClose && (
+        <button class="py-3 text-black" onClick={onClose}>
+          <Icon id="XMark" size={24} strokeWidth={2} />
+        </button>
+      )}
+    </div>
+  )
+}
+
 const Aside = (
   { title, onClose, children }: {
     title: string;
@@ -61,7 +98,9 @@ const Aside = (
   },
 ) => (
   <div class="bg-base-100 grid grid-rows-[auto_1fr] h-full max-w-[100vw]">
-    { title === MENU_TITLE && <HeaderLogin title={title} closeFunction={{onClose}} /> }
+    { title === MENU_TITLE && <HeaderLogin closeFunction={{onClose}} /> }
+    { title === SEARCH_TITLE && <SearchHeader closeFunction={{onClose}} /> }
+    { title === MINICART_TITLE && <MinicartHeader closeFunction={{onClose}} /> }
     <Suspense
       fallback={
         <div class="w-screen flex items-center justify-center">

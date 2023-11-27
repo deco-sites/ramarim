@@ -7,7 +7,7 @@ export default function SearchButton() {
   return (
     <>
       <button
-        class="hidden sm:flex items-center text-xs lg:text-sm gap-x-1 fill-white lg:fill-black text-white lg:text-black"
+        class="hidden lg:flex items-center text-xs lg:text-sm gap-x-1 fill-white lg:fill-black text-white lg:text-black"
         onClick={() => {
           displaySearchPopup.value = !displaySearchPopup.value;
         }}
@@ -18,7 +18,7 @@ export default function SearchButton() {
         Buscar
       </button>
       <button
-        class="sm:hidden flex items-center text-xs gap-x-1 fill-white lg:fill-black text-white lg:text-black"
+        class="lg:hidden flex items-center text-xs gap-x-1 fill-white lg:fill-black text-white lg:text-black"
         onClick={() => {
           displaySearchDrawer.value = !displaySearchDrawer.value;
         }}

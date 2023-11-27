@@ -21,6 +21,18 @@ export interface Props {
   };
 }
 
+const ENTITY = "NL";
+const headers = {
+  'Content-Type': 'application/json',
+  'Accept': 'application/vnd.vtex.ds.v10+json',
+  "REST-Range": "resources=0-1000",
+  "v-cache": "false"
+};
+
+const checkRegistration = async (email: string) => {
+  return fetch(`/api/dataentities/${ENTITY}/search?email=${email}&_fields=email`, {headers})
+}
+
 function Newsletter(
   { content, layout = {} }: Props,
 ) {
@@ -36,7 +48,9 @@ function Newsletter(
       const email =
         (e.currentTarget.elements.namedItem("email") as RadioNodeList)?.value;
 
-      await invoke.vtex.actions.newsletter.subscribe({ email });
+      const response = await checkRegistration(email);
+      const recordExist = response.json();
+      console.log("recordExist", recordExist);
     } finally {
       loading.value = false;
     }

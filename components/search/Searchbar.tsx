@@ -108,7 +108,7 @@ function Searchbar({
           autocomplete="off"
         />
         <button
-          class="hidden sm:inline-flex items-center h-full px-3"
+          class="hidden lg:inline-flex items-center h-full px-3"
           onClick={() => displaySearchPopup.value = false}
         >
           <Icon id="XMark" size={24} strokeWidth={2} />
