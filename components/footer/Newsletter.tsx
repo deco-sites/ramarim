@@ -43,10 +43,14 @@ function Newsletter(
         }
       };
 
-      await invoke({
+      console.log("props", props);
+
+      const res = await invoke({
         key: "deco-sites/ramarim/actions/newsletter/record.ts",
         props
-      })
+      });
+
+      console.log("RES", res);
     } finally {
       loading.value = false;
     }
