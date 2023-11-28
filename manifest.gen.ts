@@ -38,6 +38,7 @@ import * as $$$$$$30 from "./sections/Product/ImageGalleryFrontBack.tsx";
 import * as $$$$$$31 from "./sections/Product/ProductInfo.tsx";
 import * as $$$$$$32 from "./sections/Product/ImageGallerySlider.tsx";
 import * as $$$$$$33 from "./sections/Footer/Footer.tsx";
+import * as $$$$$$$$$0 from "./actions/newsletter/record.ts";
 import * as $$$$$$$$$$$0 from "./apps/site.ts";
 import * as $$$$$$$$$$$1 from "./apps/decohub.ts";
 
@@ -81,6 +82,9 @@ const manifest = {
     "deco-sites/ramarim/sections/Social/InstagramPosts.tsx": $$$$$$17,
     "deco-sites/ramarim/sections/Social/WhatsApp.tsx": $$$$$$18,
     "deco-sites/ramarim/sections/Theme/Theme.tsx": $$$$$$7,
+  },
+  "actions": {
+    "deco-sites/ramarim/actions/newsletter/record.ts": $$$$$$$$$0,
   },
   "apps": {
     "deco-sites/ramarim/apps/decohub.ts": $$$$$$$$$$$1,
