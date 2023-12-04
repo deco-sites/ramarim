@@ -81,11 +81,13 @@ function ShippingSimulation({ items }: Props) {
 
     try {
       loading.value = true;
-      simulateResult.value = await simulate({
+      const result = await simulate({
         items: items,
         postalCode: postalCode.value,
         country: cart.value?.storePreferencesData.countryCode || "BRA",
       });
+
+      simulateResult.value = result;
     } finally {
       loading.value = false;
     }

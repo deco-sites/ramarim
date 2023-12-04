@@ -1,10 +1,6 @@
 import { SendEventOnLoad } from "$store/components/Analytics.tsx";
 import Breadcrumb from "$store/components/ui/Breadcrumb.tsx";
-import AddToCartButtonLinx from "$store/islands/AddToCartButton/linx.tsx";
-import AddToCartButtonShopify from "$store/islands/AddToCartButton/shopify.tsx";
-import AddToCartButtonVNDA from "$store/islands/AddToCartButton/vnda.tsx";
 import AddToCartButtonVTEX from "$store/islands/AddToCartButton/vtex.tsx";
-import AddToCartButtonWake from "$store/islands/AddToCartButton/wake.tsx";
 import OutOfStock from "$store/islands/OutOfStock.tsx";
 import ShippingSimulation from "$store/islands/ShippingSimulation.tsx";
 import WishlistButton from "$store/islands/WishlistButton.tsx";
@@ -38,6 +34,7 @@ function ProductInfo({ page, layout }: Props) {
     breadcrumbList,
     product,
   } = page;
+
   const {
     url,
     productID,
@@ -47,6 +44,7 @@ function ProductInfo({ page, layout }: Props) {
     isVariantOf,
     additionalProperty = [],
   } = product;
+
   const description = product.description || isVariantOf?.description;
   const {
     price = 0,
@@ -66,38 +64,41 @@ function ProductInfo({ page, layout }: Props) {
       />
       {/* Code and name */}
       <div class="mt-4 sm:mt-8">
+        <h1>
+          <span class="font-medium text-xl capitalize">
+            {isVariantOf?.name}
+          </span>
+        </h1>
         <div>
           {gtin && (
             <span class="text-sm text-base-300">
-              Cod. {gtin}
+              Ref. {gtin}
             </span>
           )}
         </div>
-        <h1>
-          <span class="font-medium text-xl capitalize">
-            {layout?.name === "concat"
-              ? `${isVariantOf?.name} ${name}`
-              : layout?.name === "productGroup"
-              ? isVariantOf?.name
-              : name}
-          </span>
-        </h1>
       </div>
       {/* Prices */}
-      <div class="mt-4">
-        <div class="flex flex-row gap-2 items-center">
-          {(listPrice ?? 0) > price && (
-            <span class="line-through text-base-300 text-xs">
-              {formatPrice(listPrice, offers?.priceCurrency)}
+      <div class="flex items-center justify-between mt-4">
+        <div>
+          <div class="flex flex-row gap-2 items-center">
+            {(listPrice ?? 0) > price && (
+              <span class="line-through text-base-300 text-xs">
+                {formatPrice(listPrice, offers?.priceCurrency)}
+              </span>
+            )}
+            <span class="font-medium text-xl text-secondary">
+              {formatPrice(price, offers?.priceCurrency)}
             </span>
-          )}
-          <span class="font-medium text-xl text-secondary">
-            {formatPrice(price, offers?.priceCurrency)}
+          </div>
+          <span class="text-sm text-base-300">
+            {installments}
           </span>
         </div>
-        <span class="text-sm text-base-300">
-          {installments}
-        </span>
+        <WishlistButton
+          variant="full"
+          productID={productID}
+          productGroupID={productGroupID}
+        />
       </div>
       {/* Sku Selector */}
       <div class="mt-4 sm:mt-6">
@@ -109,67 +110,37 @@ function ProductInfo({ page, layout }: Props) {
           ? (
             <>
               {platform === "vtex" && (
-                <>
-                  <AddToCartButtonVTEX
-                    url={url || ""}
-                    name={name}
-                    productID={productID}
-                    productGroupID={productGroupID}
-                    price={price}
-                    discount={discount}
-                    seller={seller}
-                  />
-                  <WishlistButton
-                    variant="full"
-                    productID={productID}
-                    productGroupID={productGroupID}
-                  />
-                </>
-              )}
-              {platform === "wake" && (
-                <AddToCartButtonWake
+                <AddToCartButtonVTEX
                   url={url || ""}
                   name={name}
                   productID={productID}
                   productGroupID={productGroupID}
                   price={price}
                   discount={discount}
-                />
-              )}
-              {platform === "linx" && (
-                <AddToCartButtonLinx
-                  url={url || ""}
-                  name={name}
-                  productID={productID}
-                  productGroupID={productGroupID}
-                  price={price}
-                  discount={discount}
-                />
-              )}
-              {platform === "vnda" && (
-                <AddToCartButtonVNDA
-                  url={url || ""}
-                  name={name}
-                  productID={productID}
-                  productGroupID={productGroupID}
-                  price={price}
-                  discount={discount}
-                  additionalProperty={additionalProperty}
-                />
-              )}
-              {platform === "shopify" && (
-                <AddToCartButtonShopify
-                  url={url || ""}
-                  name={name}
-                  productID={productID}
-                  productGroupID={productGroupID}
-                  price={price}
-                  discount={discount}
+                  seller={seller}
                 />
               )}
             </>
           )
           : <OutOfStock productID={productID} />}
+      </div>
+      <div>
+        {
+          offers?.offers.map((offer) => {
+
+            return (
+              <div>
+                <span>{offer.seller}</span>
+                {offer.price}
+              </div>
+            );
+          })
+        }
+      </div>
+      <div>
+        {
+          JSON.stringify(offers)
+        }
       </div>
       {/* Shipping Simulation */}
       <div class="mt-8">
