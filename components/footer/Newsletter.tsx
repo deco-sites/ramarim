@@ -36,14 +36,10 @@ function Newsletter(
       const email =
         (e.currentTarget.elements.namedItem("email") as RadioNodeList)?.value;
 
-      // const res = await invoke({
-      //   key: "deco-sites/ramarim/actions/newsletter/record.ts",
-      //   props
-      // });
+      await invoke.vtex.actions.masterdata.createDocument({ data: { email, name: "Teste 123" }, acronym: "NL" });
 
-      const res = await invoke.vtex.actions.masterdata.createDocument({ data: { email }, acronym: "NL" });
     } finally {
-      loading.value = false;
+      loading.value = false; 
     }
   };
 
