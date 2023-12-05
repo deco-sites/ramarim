@@ -11,6 +11,7 @@ import Social from "$store/components/footer/Social.tsx";
 import Newsletter from "$store/islands/Newsletter.tsx";
 import type { ImageWidget } from "apps/admin/widgets.ts";
 import PoweredByDeco from "apps/website/components/PoweredByDeco.tsx";
+import Copyright from "$store/components/footer/Copyright.tsx";
 
 export type Item = {
   label: string;
@@ -24,12 +25,12 @@ export type Section = {
 
 export interface SocialItem {
   label:
-    | "Discord"
-    | "Facebook"
-    | "Instagram"
-    | "Linkedin"
-    | "Tiktok"
-    | "Twitter";
+  | "Discord"
+  | "Facebook"
+  | "Instagram"
+  | "Linkedin"
+  | "Tiktok"
+  | "Twitter";
   link: string;
 }
 
@@ -58,17 +59,17 @@ export interface NewsletterForm {
 
 export interface Layout {
   backgroundColor?:
-    | "Primary"
-    | "Secondary"
-    | "Accent"
-    | "Base 100"
-    | "Base 100 inverted";
+  | "Primary"
+  | "Secondary"
+  | "Accent"
+  | "Base 100"
+  | "Base 100 inverted";
   variation?:
-    | "Variation 1"
-    | "Variation 2"
-    | "Variation 3"
-    | "Variation 4"
-    | "Variation 5";
+  | "Variation 1"
+  | "Variation 2"
+  | "Variation 3"
+  | "Variation 4"
+  | "Variation 5";
   hide?: {
     logo?: boolean;
     newsletter?: boolean;
@@ -79,6 +80,7 @@ export interface Layout {
     regionOptions?: boolean;
     extraLinks?: boolean;
     backToTheTop?: boolean;
+    Copyright?: boolean;
   };
 }
 
@@ -102,6 +104,9 @@ export interface Props {
     title?: string;
     items: PaymentItem[];
   };
+  copyright?: {
+
+  },
   mobileApps?: MobileApps;
   regionOptions?: RegionOptions;
   extraLinks?: Item[];
@@ -119,35 +124,85 @@ function Footer({
     form: { placeholder: "", buttonText: "", helpText: "" },
   },
   sections = [{
-    "label": "Sobre",
+    "label": "Institucional",
     "items": [
       {
         "href": "/quem-somos",
         "label": "Quem somos",
       },
       {
-        "href": "/termos-de-uso",
-        "label": "Termos de uso",
+        "href": "/area-do-lojista",
+        "label": "Área do lojista",
       },
       {
-        "href": "/trabalhe-conosco",
-        "label": "Trabalhe conosco",
+        "href": "/quero-revender",
+        "label": "Quero Revender",
+      },
+      {
+        "href": "/onde-encontrar",
+        "label": "Onde Encontrar",
+      },
+      {
+        "href": "/catalogo",
+        "label": "Catálogo",
       },
     ],
   }, {
+    "label": "Ajuda e Suporte",
+    "items": [
+      {
+        "href": "/devolucao",
+        "label": "Devolução",
+      },
+      {
+        "href": "/politicas-de-privacidade",
+        "label": "Políticas de Privacidade",
+      },
+    ],
+  },
+  {
     "label": "Atendimento",
     "items": [
       {
-        "href": "/centraldeatendimento",
-        "label": "Central de atendimento",
+        "href": "/",
+        "label": "(51) 3565-8100 / (51) 4000-1846",
       },
       {
-        "href": "/whatsapp",
-        "label": "Fale conosco pelo WhatsApp",
+        "href": "/",
+        "label": "Whatsapp: (51) 3565-8111",
       },
       {
-        "href": "/trocaedevolucao",
-        "label": "Troca e devolução",
+        "href": "/",
+        "label": "sac@ramarim.com.br",
+      },
+      {
+        "href": "/",
+        "label": "Segunda à sexta-feira: 8h às 11h / 13:30h às 17h",
+      },
+    ],
+  },
+  {
+    "label": "Formas de pagamento",
+    "items": [
+      {
+        "href": "/",
+        "label": "american",
+      },
+      {
+        "href": "/",
+        "label": "visa",
+      },
+      {
+        "href": "/",
+        "label": "dinners",
+      },
+      {
+        "href": "/",
+        "label": "elo",
+      },
+      {
+        "href": "/",
+        "label": "mastercard",
       },
     ],
   }],
@@ -175,7 +230,7 @@ function Footer({
       mobileApps: false,
       regionOptions: false,
       extraLinks: false,
-      backToTheTop: false,
+      backToTheTop: true,
     },
   },
 }: Props) {
@@ -196,6 +251,8 @@ function Footer({
         layout?.variation == "Variation 3"}
     />
   );
+  const _copyright = layout?.hide?.copyright ? <></> : <Copyright />;
+
   const _social = layout?.hide?.socialLinks
     ? <></>
     : <Social content={social} vertical={layout?.variation == "Variation 3"} />;
@@ -213,35 +270,26 @@ function Footer({
     : <ExtraLinks content={extraLinks} />;
 
   return (
-    <footer
-      class={`w-full flex flex-col pt-10 pb-2 md:pb-10 gap-10 ${
-        ColorClasses(layout)
-      }`}
-    >
-      <div class="lg:container mx-6 lg:mx-auto">
-        {(!layout?.variation || layout?.variation == "Variation 1") && (
-          <div class="flex flex-col gap-10">
-            <div class="flex flex-col md:flex-row md:justify-between md:flex-wrap lg:flex-nowrap gap-8 lg:gap-12">
-              {_logo}
-              {_sectionLinks}
-              {_newsletter}
-            </div>
-            <Divider />
-            <div class="flex flex-col md:flex-row gap-10 md:gap-14 md:items-end">
-              {_payments}
-              {_social}
-              <div class="flex flex-col lg:flex-row gap-10 lg:gap-14 lg:items-end">
-                {_apps}
-                {_region}
+    <footer class="w-full flex flex-col pt-10 pb-2 md:pb-10 gap-10">
+      <div>
+        <div class="flex flex-col">
+          <div class="flex flex-col  md:justify-between md:flex-wrap lg:flex-nowrap lg:gap-12">
+            <div class="md:container md:bg-black">
+              <div class="md:container mx-6 lg:mx-auto bg-black">
+                {_newsletter}
               </div>
             </div>
-            <Divider />
-            <div class="flex flex-col-reverse md:flex-row md:justify-between gap-10">
-              <PoweredByDeco />
-              {_links}
+            <div class="lg:container lg:mx-auto mt-12">
+              {_sectionLinks}
             </div>
           </div>
-        )}
+          <div class="md:my-5">
+            {_social}
+          </div>
+          <div>
+            {_copyright}
+          </div>
+        </div>
         {layout?.variation == "Variation 2" && (
           <div class="flex flex-col gap-10">
             <div class="flex flex-col md:flex-row gap-10">
