@@ -104,9 +104,8 @@ export interface Props {
     title?: string;
     items: PaymentItem[];
   };
-  copyright?: {
-
-  },
+  institucionalText?: string;
+  copyrightText?: string;
   mobileApps?: MobileApps;
   regionOptions?: RegionOptions;
   extraLinks?: Item[];
@@ -214,6 +213,8 @@ function Footer({
     title: "Formas de pagamento",
     items: [{ label: "Mastercard" }, { label: "Visa" }, { label: "Pix" }],
   },
+  institucionalText = "O Grupo Ramarim é uma das maiores empresas calçadistas do Brasil. Fundado em 1962, é formado pelas marcas Ramarim e Comfortflex.\nSomos referência em pesquisa, moda, tecnologia do conforto e inovação, tudo pensado para levar as últimas tendências para o dia a dia das nossas consumidoras no Brasil e no mundo.",
+  copyrightText = "© Ramarim 2021 - Rua General Nascimento Vargas, 154 - Sapiranga / RS.",
   mobileApps = { apple: "/", android: "/" },
   regionOptions = { currency: [], language: [] },
   extraLinks = [],
@@ -251,7 +252,8 @@ function Footer({
         layout?.variation == "Variation 3"}
     />
   );
-  const _copyright = layout?.hide?.copyright ? <></> : <Copyright />;
+
+  const _copyright = layout?.hide?.copyright ? <></> : <Copyright text={{institucionalText, copyrightText}} />;
 
   const _social = layout?.hide?.socialLinks
     ? <></>
