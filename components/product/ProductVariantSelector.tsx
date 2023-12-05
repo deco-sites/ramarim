@@ -2,6 +2,7 @@ import Avatar from "$store/components/ui/Avatar.tsx";
 import { useVariantPossibilities } from "$store/sdk/useVariantPossiblities.ts";
 import type { Product } from "apps/commerce/types.ts";
 import { usePartial } from "apps/website/hooks/usePartial.ts";
+import ProductSimilars from "$store/islands/ProductSimilars.tsx";
 
 interface Props {
   product: Product;
@@ -19,6 +20,7 @@ function VariantSelector({ product }: Props) {
 
   return (
     <ul class="flex flex-col gap-4">
+      <ProductSimilars product={{...product}} />
       {Object.keys(possibilities).map((name) => {
         if (!allowedNames.includes(name.toLowerCase())) return null;
 

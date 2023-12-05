@@ -124,24 +124,6 @@ function ProductInfo({ page, layout }: Props) {
           )
           : <OutOfStock productID={productID} />}
       </div>
-      <div>
-        {
-          offers?.offers.map((offer) => {
-
-            return (
-              <div>
-                <span>{offer.seller}</span>
-                {offer.price}
-              </div>
-            );
-          })
-        }
-      </div>
-      <div>
-        {
-          JSON.stringify(offers)
-        }
-      </div>
       {/* Shipping Simulation */}
       <div class="mt-8">
         {platform === "vtex" && (

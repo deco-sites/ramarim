@@ -4,6 +4,7 @@
 
 import * as $$$0 from "./loaders/List/Sections.tsx";
 import * as $$$1 from "./loaders/Layouts/ProductCard.tsx";
+import * as $$$2 from "./loaders/Product/getSimilars.tsx";
 import * as $$$$$$0 from "./sections/Layout/GridItem.tsx";
 import * as $$$$$$1 from "./sections/Layout/Grid.tsx";
 import * as $$$$$$2 from "./sections/Layout/Flex.tsx";
@@ -46,6 +47,7 @@ const manifest = {
   "loaders": {
     "deco-sites/ramarim/loaders/Layouts/ProductCard.tsx": $$$1,
     "deco-sites/ramarim/loaders/List/Sections.tsx": $$$0,
+    "deco-sites/ramarim/loaders/Product/getSimilars.tsx": $$$2,
   },
   "sections": {
     "deco-sites/ramarim/sections/Category/CategoryBanner.tsx": $$$$$$20,

@@ -1,6 +1,7 @@
 {
   "imports": {
     "deco-sites/ramarim/": "./",
+    "deco-sites/std/": "https://denopkg.com/deco-sites/std@1.21.6/",
 
     "$store/": "./",
     "deco/": "https://denopkg.com/deco-cx/deco@1.43.0/",
