@@ -1,4 +1,4 @@
-import Icon, { AvailableIcons } from "$store/components/ui/Icon.tsx";
+import Icon, { AvailableIcons} from "$store/components/ui/Icon.tsx";
 import Header from "$store/components/ui/SectionHeader.tsx";
 
 export interface Props {
@@ -8,6 +8,7 @@ export interface Props {
     label: string;
     icon: AvailableIcons;
     description: string;
+    iconRight?: AvailableIcons;
   }>;
   layout?: {
     variation?: "Simple" | "With border" | "Color reverse";
@@ -23,16 +24,23 @@ export default function Benefits(
     description = "",
     benefits = [{
       icon: "Truck",
-      label: "Entrega em todo Brasil",
-      description: "Consulte o prazo no fechamento da compra.",
+      label: "ATÉ 6X",
+      description: "SEM JUROS!",
     }, {
       icon: "Discount",
-      label: "15% na primeira compra",
-      description: "Aplicado direto na sacola de compras.",
+      label: "1° DEVOLUÇÃO",
+      description: "É POR NOSSA CONTA!",
     }, {
       icon: "ArrowsPointingOut",
-      label: "Devolução grátis",
-      description: "Veja as condições para devolver seu produto.",
+      label: "VENDA NA RAMARIM",
+      description: "FAÇA PARTE DO NOSSO MARKETPLACE!",
+      iconRight: "Truck",
+    },
+    {
+      icon: "ArrowsPointingOut",
+      label: "PERTO DE VOCÊ",
+      description: "ENCONTRE O VENDEDOR NA SUA CIDADE!",
+      iconRight: "Truck",
     }],
     layout,
   } = props;
@@ -54,7 +62,7 @@ export default function Benefits(
           showDivider && benefitLayout !== "piledup"
             ? "border-b border-neutral-300"
             : ""
-        } ${showDivider ? "pb-4 lg:pr-8 lg:border-r lg:border-b-0" : ""} ${
+        } ${showDivider ? "pb-4 lg:pr-8 lg:border-b-0" : ""} ${
           showDivider && !reverse ? "lg:pb-0" : ""
         }`}
       >
@@ -68,20 +76,20 @@ export default function Benefits(
             fill="currentColor"
           />
         </div>
-        <div class="flex-auto flex flex-col gap-1 lg:gap-2">
+        <div class="flex-auto flex flex-col">
           <div
-            class={`text-base lg:text-xl leading-7 ${
-              reverse ? "text-base-100" : "text-base-content"
-            }`}
+            class={`text-base md:text-lg font-semibold text-black uppercase`}
           >
             {benefit.label}
           </div>
           <p
-            class={`text-sm leading-5 ${
-              reverse ? "text-base-100" : "text-neutral"
-            } ${benefitLayout == "piledup" ? "hidden lg:block" : ""}`}
+            class={`text-xs text-black uppercase`}
           >
             {benefit.description}
+
+            <span>
+              {benefit?.iconRight}
+            </span>
           </p>
         </div>
       </div>
