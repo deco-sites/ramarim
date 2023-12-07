@@ -37,7 +37,7 @@ function SimilarSelector({ product }: Props) {
                 {productSimilars.value.map((similar) => (
                     <li>
                         <a href={similar.url}>
-                            <img src={similar.image[0].url} />
+                            <img src={similar.image[0].url.replace(/(https:\/\/ramarim\.vteximg\.com\.br\/arquivos\/ids\/)([0-9]*)(\/.*)/, "$1$2-50-50$3")} />
                         </a>
                     </li>
                 ))}

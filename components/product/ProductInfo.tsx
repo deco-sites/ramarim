@@ -1,5 +1,4 @@
 import { SendEventOnLoad } from "$store/components/Analytics.tsx";
-import Breadcrumb from "$store/components/ui/Breadcrumb.tsx";
 import AddToCartButtonVTEX from "$store/islands/AddToCartButton/vtex.tsx";
 import OutOfStock from "$store/islands/OutOfStock.tsx";
 import ShippingSimulation from "$store/islands/ShippingSimulation.tsx";
@@ -10,20 +9,13 @@ import { usePlatform } from "$store/sdk/usePlatform.tsx";
 import { ProductDetailsPage } from "apps/commerce/types.ts";
 import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
 import ProductSelector from "./ProductVariantSelector.tsx";
+import MeasurementChart from "./MeasurementChart.tsx";
 
 interface Props {
   page: ProductDetailsPage | null;
-  layout: {
-    /**
-     * @title Product Name
-     * @description How product title will be displayed. Concat to concatenate product and sku names.
-     * @default product
-     */
-    name?: "concat" | "productGroup" | "product";
-  };
 }
 
-function ProductInfo({ page, layout }: Props) {
+function ProductInfo({ page }: Props) {
   const platform = usePlatform();
 
   if (page === null) {
@@ -42,7 +34,6 @@ function ProductInfo({ page, layout }: Props) {
     name = "",
     gtin,
     isVariantOf,
-    additionalProperty = [],
   } = product;
 
   const description = product.description || isVariantOf?.description;
@@ -58,10 +49,6 @@ function ProductInfo({ page, layout }: Props) {
 
   return (
     <div class="flex flex-col">
-      {/* Breadcrumb */}
-      <Breadcrumb
-        itemListElement={breadcrumbList?.itemListElement.slice(0, -1)}
-      />
       {/* Code and name */}
       <div class="mt-4 sm:mt-8">
         <h1>
@@ -104,6 +91,7 @@ function ProductInfo({ page, layout }: Props) {
       <div class="mt-4 sm:mt-6">
         <ProductSelector product={product} />
       </div>
+      <MeasurementChart />
       {/* Add to Cart and Favorites button */}
       <div class="mt-4 sm:mt-10 flex flex-col gap-2">
         {availability === "https://schema.org/InStock"
@@ -139,16 +127,32 @@ function ProductInfo({ page, layout }: Props) {
       {/* Description card */}
       <div class="mt-4 sm:mt-6">
         <span class="text-sm">
-          {description && (
-            <details>
-              <summary class="cursor-pointer">Descrição</summary>
-              <div
-                class="ml-2 mt-2"
-                dangerouslySetInnerHTML={{ __html: description }}
-              />
-            </details>
-          )}
+          <div
+            class="ml-2 mt-2"
+            dangerouslySetInnerHTML={{ __html: description }}
+          />
         </span>
+      </div>
+      <div class="mt-4 sm:mt-6">
+        {
+          isVariantOf.additionalProperty?.map((property) => {
+            if ([
+              "video-produto",
+              "sellerid",
+              "tamanho",
+              "cor"
+            ].includes(property.name?.toLowerCase())) return null;
+
+            return (
+              <div class="mt-2">
+                <span>{property.name}</span>
+                <div>
+                  {property.value}
+                </div>
+              </div>
+            )
+          })
+        }
       </div>
       {/* Analytics Event */}
       <SendEventOnLoad
