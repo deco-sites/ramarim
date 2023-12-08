@@ -1,7 +1,7 @@
 interface Props {
     text: {
         institucionalText?: string,
-        copyrightText?: string
+        copyrightText?: string,
     }
 }
 
@@ -11,7 +11,7 @@ export default function Copyright(props: Props) {
         <div>
             <div class="lg:container flex flex-col justify-center gap-10 mx-4 my-5 md:gap-24 md:flex-row md:mx-auto">
                 <div class="flex items-center justify-center">
-                    <img class="object-cover" src="https://ramarim.vteximg.com.br/arquivos/grupoRamarim.png" alt="Descrição da imagem" />
+                    <img src="https://ramarim.vteximg.com.br/arquivos/grupoRamarim.png" alt="Descrição da imagem" />
                 </div>
                 <div>
                     <p class="text-center text-xs md:text-sm md:text-start md:m-0">{institucionalText}</p>
