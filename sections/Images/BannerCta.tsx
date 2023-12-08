@@ -3,6 +3,7 @@ import Icon from "$store/components/ui/Icon.tsx";
 import { useId } from "$store/sdk/useId.ts";
 import Slider from "$store/components/ui/Slider.tsx";
 import SliderJS from "$store/islands/SliderJS.tsx";
+import Image from "apps/website/components/Image.tsx";
 
 interface BannerCTA {
     srcMobile?: ImageWidget;
@@ -14,95 +15,83 @@ interface BannerCTA {
 }
 
 interface Props {
-   // banners?: BannerCTA[];
+   banners?: BannerCTA[];
 }
 
-const BannerCTA = (props: Props) => {
+const Banner = (banner: BannerCTA, index: number) => {
+    return (
+        <div key={index} className="flex mt-2 mx-2">
+            <Image
+                src={banner?.srcDesktop || banner?.srcMobile}
+                alt={banner.alt}
+                loading="lazy"
+            />
+            <div className="absolute">
+                <div className="flex justify-center">
+                    <h3 className="font-normal text-3xl text-white uppercase">
+                        {banner?.title}
+                    </h3>
+                </div>
+                <div className="flex justify-center">
+                    {banner?.buttonText && (
+                        <a
+                            href={banner.href}
+                            className="mt-5 bg-transparent border border-solid border-white text-base text-white px-14 py-2 md:px-24 uppercase"
+                        >
+                            {banner.buttonText}
+                        </a>
+                    )}
+                </div>
+            </div>
+        </div>
+    )
+}
+
+const BannerCTA = ({
+    banners = []
+}: Props) => {
     const id = useId();
-
-    const { banners } = props;
-
-    console.log(banners);
 
     return (
         <>
-            <div id={id} class="relative order-1 sm:order-2">
-                <Slider class="carousel carousel-center gap-6 w-screen">
-                    {banners?.map((banner, index) => (
-                        <Slider.Item
-                            index={index}
-                            class="carousel-item w-full"
+            {/* Mobile */}
+            {
+                banners.length > 0 ? (
+                    <div id={id} class="flex sm:hidden relative order-1 sm:order-2">
+                        <Slider class="carousel carousel-center gap-6 w-screen">
+                            {banners?.map((banner, index) => (
+                                <Slider.Item
+                                    index={index}
+                                    class="carousel-item w-full"
+                                >
+                                    <Banner {...banner} index={index} />
+                                </Slider.Item>
+                            ))}
+                        </Slider>
+                        <Slider.PrevButton
+                            class="no-animation absolute left-2 top-1/2 btn btn-circle btn-outline"
+                            disabled
                         >
-                            <div className="w-96 h-96 flex flex-col m-auto">
-                                <div className="mt-64">
-                                    <div className="flex justify-center">
-                                        <h3 className="font-normal text-3xl text-white uppercase">
-                                            {banner?.title}
-                                        </h3>
-                                    </div>
-                                    <div className="flex justify-center">
-                                        {banner?.buttonText && (
-                                            <a
-                                                href={banner.href}
-                                                className="mt-5 bg-transparent border border-solid border-white text-base text-white px-14 py-2 md:px-24 uppercase"
-                                            >
-                                                {banner.buttonText}
-                                            </a>
-                                        )}
-                                    </div>
-                                </div>
-                            </div>
-                        </Slider.Item>
-                    ))}
-                </Slider>
-                <Slider.PrevButton
-                    class="no-animation absolute left-2 top-1/2 btn btn-circle btn-outline"
-                    disabled
-                >
-                    <Icon size={24} id="ChevronLeft" strokeWidth={3} />
-                </Slider.PrevButton>
+                            <Icon size={24} id="ChevronLeft" strokeWidth={3} />
+                        </Slider.PrevButton>
 
-                <Slider.NextButton
-                    class="no-animation absolute right-2 top-1/2 btn btn-circle btn-outline"
-                    disabled={banners.length < 2}
-                >
-                    <Icon size={24} id="ChevronRight" strokeWidth={3} />
-                </Slider.NextButton>
+                        <Slider.NextButton
+                            class="no-animation absolute right-2 top-1/2 btn btn-circle btn-outline"
+                            disabled={banners.length < 2}
+                        >
+                            <Icon size={24} id="ChevronRight" strokeWidth={3} />
+                        </Slider.NextButton>
 
-                <SliderJS rootId={id} />
-            </div>
-            {banners?.map((banner, index) => (
-                <div
-                    key={index}
-                    className={`bg-cover flex mt-2 mx-2`}
-                    style={{
-                        backgroundImage: `url("${banner?.srcDesktop || banner?.srcMobile}")`,
-                        backgroundRepeat: 'no-repeat',
-                        backgroundPosition: 'center',
-                    }}
-                    alt={banner.alt}
-                >
-                    <div className="w-96 h-96 flex flex-col m-auto">
-                        <div className="mt-64">
-                            <div className="flex justify-center">
-                                <h3 className="font-normal text-3xl text-white uppercase">
-                                    {banner?.title}
-                                </h3>
-                            </div>
-                            <div className="flex justify-center">
-                                {banner?.buttonText && (
-                                    <a
-                                        href={banner.href}
-                                        className="mt-5 bg-transparent border border-solid border-white text-base text-white px-14 py-2 md:px-24 uppercase"
-                                    >
-                                        {banner.buttonText}
-                                    </a>
-                                )}
-                            </div>
-                        </div>
+                        <SliderJS rootId={id} />
                     </div>
-                </div>
-            ))}
+                ) : null
+            }
+            {/* Desktop */}
+            <div class="hidden sm:flex container gap-4">
+                {banners?.map((banner, index) => (
+                    <Banner {...banner} index={index} />
+                ))}
+            </div>
         </>
     );
 };
