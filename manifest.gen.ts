@@ -3,8 +3,9 @@
 // This file is automatically updated during development when running `dev.ts`.
 
 import * as $$$0 from "./loaders/List/Sections.tsx";
-import * as $$$1 from "./loaders/Layouts/ProductCard.tsx";
-import * as $$$2 from "./loaders/Product/getSimilars.tsx";
+import * as $$$1 from "./loaders/product/getSellers.ts";
+import * as $$$2 from "./loaders/product/getSimilars.tsx";
+import * as $$$3 from "./loaders/Layouts/ProductCard.tsx";
 import * as $$$$$$0 from "./sections/Layout/GridItem.tsx";
 import * as $$$$$$1 from "./sections/Layout/Grid.tsx";
 import * as $$$$$$2 from "./sections/Layout/Flex.tsx";
@@ -31,23 +32,25 @@ import * as $$$$$$22 from "./sections/Miscellaneous/CookieConsent.tsx";
 import * as $$$$$$23 from "./sections/Miscellaneous/CampaignTimer.tsx";
 import * as $$$$$$24 from "./sections/Product/ProductShelf.tsx";
 import * as $$$$$$25 from "./sections/Product/ProductShelfTabbed.tsx";
-import * as $$$$$$26 from "./sections/Product/Wishlist.tsx";
-import * as $$$$$$27 from "./sections/Product/NotFound.tsx";
-import * as $$$$$$28 from "./sections/Product/SearchResult.tsx";
-import * as $$$$$$29 from "./sections/Product/NotFoundChallenge.tsx";
-import * as $$$$$$30 from "./sections/Product/ImageGalleryFrontBack.tsx";
-import * as $$$$$$31 from "./sections/Product/ProductInfo.tsx";
-import * as $$$$$$32 from "./sections/Product/ImageGallerySlider.tsx";
-import * as $$$$$$33 from "./sections/Footer/Footer.tsx";
+import * as $$$$$$26 from "./sections/Product/ProductMain.tsx";
+import * as $$$$$$27 from "./sections/Product/Wishlist.tsx";
+import * as $$$$$$28 from "./sections/Product/NotFound.tsx";
+import * as $$$$$$29 from "./sections/Product/SearchResult.tsx";
+import * as $$$$$$30 from "./sections/Product/NotFoundChallenge.tsx";
+import * as $$$$$$31 from "./sections/Product/ImageGalleryFrontBack.tsx";
+import * as $$$$$$32 from "./sections/Product/ProductInfo.tsx";
+import * as $$$$$$33 from "./sections/Product/ImageGallerySlider.tsx";
+import * as $$$$$$34 from "./sections/Footer/Footer.tsx";
 import * as $$$$$$$$$0 from "./actions/newsletter/record.ts";
 import * as $$$$$$$$$$$0 from "./apps/site.ts";
 import * as $$$$$$$$$$$1 from "./apps/decohub.ts";
 
 const manifest = {
   "loaders": {
-    "deco-sites/ramarim/loaders/Layouts/ProductCard.tsx": $$$1,
+    "deco-sites/ramarim/loaders/Layouts/ProductCard.tsx": $$$3,
     "deco-sites/ramarim/loaders/List/Sections.tsx": $$$0,
-    "deco-sites/ramarim/loaders/Product/getSimilars.tsx": $$$2,
+    "deco-sites/ramarim/loaders/product/getSellers.ts": $$$1,
+    "deco-sites/ramarim/loaders/product/getSimilars.tsx": $$$2,
   },
   "sections": {
     "deco-sites/ramarim/sections/Category/CategoryBanner.tsx": $$$$$$20,
@@ -56,7 +59,7 @@ const manifest = {
     "deco-sites/ramarim/sections/Content/Faq.tsx": $$$$$$8,
     "deco-sites/ramarim/sections/Content/Logos.tsx": $$$$$$11,
     "deco-sites/ramarim/sections/Content/Testimonials.tsx": $$$$$$10,
-    "deco-sites/ramarim/sections/Footer/Footer.tsx": $$$$$$33,
+    "deco-sites/ramarim/sections/Footer/Footer.tsx": $$$$$$34,
     "deco-sites/ramarim/sections/Gallery.tsx": $$$$$$19,
     "deco-sites/ramarim/sections/Header/Header.tsx": $$$$$$12,
     "deco-sites/ramarim/sections/Images/BannerGrid.tsx": $$$$$$15,
@@ -72,15 +75,16 @@ const manifest = {
     "deco-sites/ramarim/sections/Miscellaneous/CampaignTimer.tsx": $$$$$$23,
     "deco-sites/ramarim/sections/Miscellaneous/CookieConsent.tsx": $$$$$$22,
     "deco-sites/ramarim/sections/Newsletter/Newsletter.tsx": $$$$$$6,
-    "deco-sites/ramarim/sections/Product/ImageGalleryFrontBack.tsx": $$$$$$30,
-    "deco-sites/ramarim/sections/Product/ImageGallerySlider.tsx": $$$$$$32,
-    "deco-sites/ramarim/sections/Product/NotFound.tsx": $$$$$$27,
-    "deco-sites/ramarim/sections/Product/NotFoundChallenge.tsx": $$$$$$29,
-    "deco-sites/ramarim/sections/Product/ProductInfo.tsx": $$$$$$31,
+    "deco-sites/ramarim/sections/Product/ImageGalleryFrontBack.tsx": $$$$$$31,
+    "deco-sites/ramarim/sections/Product/ImageGallerySlider.tsx": $$$$$$33,
+    "deco-sites/ramarim/sections/Product/NotFound.tsx": $$$$$$28,
+    "deco-sites/ramarim/sections/Product/NotFoundChallenge.tsx": $$$$$$30,
+    "deco-sites/ramarim/sections/Product/ProductInfo.tsx": $$$$$$32,
+    "deco-sites/ramarim/sections/Product/ProductMain.tsx": $$$$$$26,
     "deco-sites/ramarim/sections/Product/ProductShelf.tsx": $$$$$$24,
     "deco-sites/ramarim/sections/Product/ProductShelfTabbed.tsx": $$$$$$25,
-    "deco-sites/ramarim/sections/Product/SearchResult.tsx": $$$$$$28,
-    "deco-sites/ramarim/sections/Product/Wishlist.tsx": $$$$$$26,
+    "deco-sites/ramarim/sections/Product/SearchResult.tsx": $$$$$$29,
+    "deco-sites/ramarim/sections/Product/Wishlist.tsx": $$$$$$27,
     "deco-sites/ramarim/sections/Social/InstagramPosts.tsx": $$$$$$17,
     "deco-sites/ramarim/sections/Social/WhatsApp.tsx": $$$$$$18,
     "deco-sites/ramarim/sections/Theme/Theme.tsx": $$$$$$7,

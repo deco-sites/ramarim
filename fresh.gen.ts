@@ -16,14 +16,16 @@ import * as $$9 from "./islands/Header/Cart/vtex.tsx";
 import * as $$10 from "./islands/Header/Cart/wake.tsx";
 import * as $$11 from "./islands/Header/Drawers.tsx";
 import * as $$12 from "./islands/Header/Searchbar.tsx";
-import * as $$13 from "./islands/Newsletter.tsx";
-import * as $$14 from "./islands/OutOfStock.tsx";
-import * as $$15 from "./islands/ProductImageZoom.tsx";
-import * as $$16 from "./islands/ProductSimilars.tsx";
-import * as $$17 from "./islands/SearchControls.tsx";
-import * as $$18 from "./islands/ShippingSimulation.tsx";
-import * as $$19 from "./islands/SliderJS.tsx";
-import * as $$20 from "./islands/WishlistButton.tsx";
+import * as $$13 from "./islands/MeasurementChart.tsx";
+import * as $$14 from "./islands/Newsletter.tsx";
+import * as $$15 from "./islands/OutOfStock.tsx";
+import * as $$16 from "./islands/ProductImageZoom.tsx";
+import * as $$17 from "./islands/ProductSimilars.tsx";
+import * as $$18 from "./islands/SearchControls.tsx";
+import * as $$19 from "./islands/SellersSelector.tsx";
+import * as $$20 from "./islands/ShippingSimulation.tsx";
+import * as $$21 from "./islands/SliderJS.tsx";
+import * as $$22 from "./islands/WishlistButton.tsx";
 
 const manifest = {
   routes: {
@@ -43,14 +45,16 @@ const manifest = {
     "./islands/Header/Cart/wake.tsx": $$10,
     "./islands/Header/Drawers.tsx": $$11,
     "./islands/Header/Searchbar.tsx": $$12,
-    "./islands/Newsletter.tsx": $$13,
-    "./islands/OutOfStock.tsx": $$14,
-    "./islands/ProductImageZoom.tsx": $$15,
-    "./islands/ProductSimilars.tsx": $$16,
-    "./islands/SearchControls.tsx": $$17,
-    "./islands/ShippingSimulation.tsx": $$18,
-    "./islands/SliderJS.tsx": $$19,
-    "./islands/WishlistButton.tsx": $$20,
+    "./islands/MeasurementChart.tsx": $$13,
+    "./islands/Newsletter.tsx": $$14,
+    "./islands/OutOfStock.tsx": $$15,
+    "./islands/ProductImageZoom.tsx": $$16,
+    "./islands/ProductSimilars.tsx": $$17,
+    "./islands/SearchControls.tsx": $$18,
+    "./islands/SellersSelector.tsx": $$19,
+    "./islands/ShippingSimulation.tsx": $$20,
+    "./islands/SliderJS.tsx": $$21,
+    "./islands/WishlistButton.tsx": $$22,
   },
   baseUrl: import.meta.url,
 };

@@ -9,7 +9,8 @@ import { usePlatform } from "$store/sdk/usePlatform.tsx";
 import { ProductDetailsPage } from "apps/commerce/types.ts";
 import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
 import ProductSelector from "./ProductVariantSelector.tsx";
-import MeasurementChart from "./MeasurementChart.tsx";
+import SellersSelector from "$store/islands/SellersSelector.tsx";
+import MeasurementChart from "$store/islands/MeasurementChart.tsx";
 
 interface Props {
   page: ProductDetailsPage | null;
@@ -112,6 +113,7 @@ function ProductInfo({ page }: Props) {
           )
           : <OutOfStock productID={productID} />}
       </div>
+      <SellersSelector />
       {/* Shipping Simulation */}
       <div class="mt-8">
         {platform === "vtex" && (
