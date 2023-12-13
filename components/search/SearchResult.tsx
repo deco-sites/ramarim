@@ -34,6 +34,7 @@ function NotFound() {
   );
 }
 
+
 function Result({
   page,
   layout,
@@ -42,20 +43,65 @@ function Result({
   const { products, filters, breadcrumb, pageInfo, sortOptions } = page;
   const perPage = pageInfo.recordPerPage || products.length;
   const offset = pageInfo.currentPage * perPage;
+  const productsFound = (
+    <h6 class="text-black text-xs">
+      {pageInfo.records} Produtos
+    </h6>
+    /*{ <div>{productsFound}</div> }*/
+  );
+
+  const Pagination = (
+    <div class="flex justify-center my-4">
+      <div class="join">
+        <a
+          aria-label="previous page link"
+          rel="prev"
+          href={pageInfo.previousPage ?? "#"}
+          class="btn bg-transparent hover:bg-slate-50 border-none join-item"
+        >
+          <Icon id="ChevronLeft" size={24} strokeWidth={2} />
+        </a>
+
+        <a class="btn bg-transparent border-none hover:bg-slate-50 join-item mx-[1px]"
+          href={pageInfo.previousPage}>
+          {pageInfo.previousPage && pageInfo.previousPage.replace('?page=', "")}
+        </a>
+
+        <span class="btn join-item border border-solid hover:bg-slate-50 bg-transparent border-black">
+          {pageInfo.currentPage}
+        </span>
+
+        <a class="btn bg-transparent border-none hover:bg-slate-50 join-item mx-[1px]"
+          href={pageInfo.nextPage}>
+          {pageInfo.nextPage && (pageInfo.nextPage).replace('?page=', "")}
+        </a>
+        <a
+          aria-label="next page link"
+          rel="next"
+          href={pageInfo.nextPage ?? "#"}
+          class="btn bg-transparent border-none hover:bg-slate-50 join-item"
+        >
+          <Icon id="ChevronRight" size={24} strokeWidth={2} />
+        </a>
+      </div>
+    </div>
+  )
+
 
   return (
     <>
       <div class="container px-4 sm:py-10">
         <SearchControls
+          breadcrumb={breadcrumb}
           sortOptions={sortOptions}
           filters={filters}
-          breadcrumb={breadcrumb}
+          productsFound={productsFound}
           displayFilter={layout?.variant === "drawer"}
+          Pagination={Pagination}
         />
-
         <div class="flex flex-row">
           {layout?.variant === "aside" && filters.length > 0 && (
-            <aside class="hidden sm:block w-min min-w-[250px]">
+            <aside class="hidden sm:block w-min min-w-[300px]">
               <Filters filters={filters} />
             </aside>
           )}
@@ -68,30 +114,9 @@ function Result({
           </div>
         </div>
 
-        <div class="flex justify-center my-4">
-          <div class="join">
-            <a
-              aria-label="previous page link"
-              rel="prev"
-              href={pageInfo.previousPage ?? "#"}
-              class="btn btn-ghost join-item"
-            >
-              <Icon id="ChevronLeft" size={24} strokeWidth={2} />
-            </a>
-            <span class="btn btn-ghost join-item">
-              Page {pageInfo.currentPage + 1}
-            </span>
-            <a
-              aria-label="next page link"
-              rel="next"
-              href={pageInfo.nextPage ?? "#"}
-              class="btn btn-ghost join-item"
-            >
-              <Icon id="ChevronRight" size={24} strokeWidth={2} />
-            </a>
-          </div>
-        </div>
+
       </div>
+      {Pagination}
       <SendEventOnLoad
         event={{
           name: "view_item_list",
@@ -105,6 +130,8 @@ function Result({
                 index: offset + index,
                 product,
                 breadcrumbList: page.breadcrumb,
+
+
               })
             ),
           },

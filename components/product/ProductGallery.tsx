@@ -33,10 +33,10 @@ const DESKTOP_COLUMNS = {
 function ProductGallery({ products, layout, offset }: Props) {
   const platform = usePlatform();
   const mobile = MOBILE_COLUMNS[layout?.columns?.mobile ?? 2];
-  const desktop = DESKTOP_COLUMNS[layout?.columns?.desktop ?? 4];
+  const desktop = DESKTOP_COLUMNS[layout?.columns?.desktop ?? 3];
 
   return (
-    <div class={`grid ${mobile} gap-2 items-center ${desktop} sm:gap-10`}>
+    <div class={`grid grid-cols-1 gap-2 items-center md:grid-cols-2 lg:grid-cols-3 sm:gap-10`}>
       {products?.map((product, index) => (
         <ProductCard
           product={product}
