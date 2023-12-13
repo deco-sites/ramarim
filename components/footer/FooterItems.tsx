@@ -50,8 +50,8 @@ export default function FooterItems(
           <ul class="flex flex-col md:hidden gap-4">
             {sections.map((section) => (
               <li>
-                <div class="collapse collapse-arrow py-2 px-2 rounded-none border-b border-solid border-black">
-                  <input type="checkbox" class="min-h-[0]  " />
+                <div class="collapse collapse-arrow py-2 border-b border-solid border-gray-300 rounded-none ">
+                  <input type="checkbox" class="min-h-[0]" />
                   <div class="collapse-title min-h-[0] !p-0 flex gap-2">
                     <span class="uppercase mx-6">{section.label}</span>
                   </div>

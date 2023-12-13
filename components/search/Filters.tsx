@@ -71,9 +71,9 @@ function Filters({ filters }: Props) {
       {filters
         .filter(isToggle)
         .map((filter) => (
-          <div className="collapse collapse-arrow py-2 ">
+          <div className="collapse collapse-arrow pb-4 border-b border-solid border-gray-300 rounded-none">
             <input type="checkbox" className="min-h-[0]"/>
-            <div class="collapse-title min-h-[0] !p-0 flex gap-2">
+            <div class="collapse-title min-h-[0] !p-0 flex gap-2 divide-y divide-black">
               <span className="uppercase text-sm">{filter.label}</span>
             </div>
             <div className="collapse-content px-0">
