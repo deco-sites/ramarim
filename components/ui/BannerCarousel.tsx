@@ -78,7 +78,7 @@ const DEFAULT_PROPS = {
   preload: true,
 };
 
-function BannerItem({ image, lcp }: { image: Banner; lcp?: boolean }) {
+ function BannerItem({ image, lcp }: { image: Banner; lcp?: boolean }) {
   const {
     alt,
     theme,

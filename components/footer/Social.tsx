@@ -18,13 +18,12 @@ export default function Social(
   },
 ) {
   return (
-    <>
+    <div class="bg-gray-200 py-3">
       {content && content.items && content.items.length > 0 && (
-        <div class="flex flex-col gap-4">
-          {content.title && <h3 class="text-lg">{content.title}</h3>}
+        <div class="flex flex-col gap-4 ">
           <ul
             class={`flex gap-4 ${
-              vertical ? "lg:flex-col lg:items-start" : "flex-wrap items-center"
+              vertical ? "lg:flex-col lg:items-start" : "flex-wrap items-center justify-center"
             }`}
           >
             {content.items.map((item) => {
@@ -50,6 +49,6 @@ export default function Social(
           </ul>
         </div>
       )}
-    </>
+    </div>
   );
 }

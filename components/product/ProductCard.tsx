@@ -95,7 +95,7 @@ function ProductCard(
     <a
       href={url && relative(url)}
       aria-label="view product"
-      class="btn btn-block"
+      class="btn btn-block bg-transparent border border-solid border-black rounded-none hover:bg-transparent uppercase text-base font-normal text-black"
     >
       Ver produto
     </a>
@@ -167,7 +167,7 @@ function ProductCard(
       {/* Prices & Name */}
       <div class="flex-auto flex flex-col p-2 gap-3 lg:gap-4">
         <h2
-          class="truncate text-base lg:text-lg text-base-content"
+          class="truncate text-base lg:text-lg text-base-content font-semibold"
         >
           {isVariantOf?.name}
         </h2>
@@ -176,17 +176,17 @@ function ProductCard(
             class="flex items-center gap-x-1"
           >
             <div
-              class="line-through text-base-300 text-xs"
+              class="line-through text-gray-300 text-xl"
             >
               {formatPrice(listPrice, offers?.priceCurrency)}
             </div>
-            <div class="text-accent text-base lg:text-xl">
+            <div class="text-black text-xl font-semibold">
               {formatPrice(price, offers?.priceCurrency)}
             </div>
           </div>
           {
             !installments ? null : (
-              <div class="text-base-300 text-sm lg:text-base truncate">
+              <div class="text-gray-600 text-base font-medium truncate">
                 {installments}
               </div>
             )
