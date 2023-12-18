@@ -16,7 +16,7 @@ export default function ProductMain(props: Props) {
       <Breadcrumb 
         itemListElement={breadcrumbList?.itemListElement.slice(0, -1)}
       />
-      <div class="flex flex-col lg:flex-row">
+      <div class="flex flex-col lg:flex-row lg:gap-8">
         <GallerySlider page={props.page} />
         <ProductInfo page={props.page} />
       </div>

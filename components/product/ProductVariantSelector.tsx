@@ -1,17 +1,13 @@
 import Avatar from "$store/components/ui/Avatar.tsx";
-import { useVariantPossibilities } from "$store/sdk/useVariantPossiblities.ts";
-import type { Product } from "apps/commerce/types.ts";
-// import { usePartial } from "apps/website/hooks/usePartial.ts";
 import ProductSimilars from "$store/islands/ProductSimilars.tsx";
+import MeasurementChart from "$store/islands/MeasurementChart.tsx";
+import type { Product } from "apps/commerce/types.ts";
+import { usePartialSection } from "deco/hooks/usePartialSection.ts";
+import { useVariantPossibilities } from "$store/sdk/useVariantPossiblities.ts";
 
 interface Props {
   product: Product;
 }
-
-const allowedNames = [
-  "tamanho",
-  "cor"
-]
 
 function VariantSelector({ product }: Props) {
   const { url, isVariantOf } = product;
@@ -22,18 +18,21 @@ function VariantSelector({ product }: Props) {
     <ul class="flex flex-col gap-4">
       <ProductSimilars product={{...product}} />
       {Object.keys(possibilities).map((name) => {
-        if (!allowedNames.includes(name.toLowerCase())) return null;
+        if (name.toLowerCase() !== "tamanho") return null;
 
         return (
-          <li class="flex flex-col gap-2">
-            <span class="text-sm">{name}</span>
+          <li class="flex flex-col">
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-base uppercase">{name}</span>
+              <MeasurementChart />
+            </div>
             <ul class="flex flex-row gap-3">
               {Object.entries(possibilities[name]).map(([value, link]) => {
-                // const partial = usePartial({ href: link });
+                const partial = usePartialSection({ href: link });
   
                 return (
                   <li>
-                    <a href={link}>
+                    <button {...partial}>
                       <Avatar
                         content={value}
                         variant={link === url
@@ -42,7 +41,7 @@ function VariantSelector({ product }: Props) {
                           ? "default"
                           : "disabled"}
                       />
-                    </a>
+                    </button>
                   </li>
                 );
               })}

@@ -27,17 +27,17 @@ function SimilarSelector({ product }: Props) {
         getSimilars();
     }, []);
 
-    if (!productSimilars) return null;
     if (productSimilars.value === null) return null;
     if (productSimilars.value.length === 0) return null;
     
     return (
         <div>
-            <ul class="flex flex-row gap-3">
+            <span class="block text-base uppercase mb-2">Cores</span>
+            <ul class="flex flex-wrap flex-row gap-2">
                 {productSimilars.value.map((similar) => (
-                    <li>
+                    <li class="border border-gray-300 min-w-16">
                         <a href={similar.url}>
-                            <img src={similar.image[0].url.replace(/(https:\/\/ramarim\.vteximg\.com\.br\/arquivos\/ids\/)([0-9]*)(\/.*)/, "$1$2-50-50$3")} />
+                            <img src={similar.image[0].url.replace(/(https:\/\/ramarim\.vteximg\.com\.br\/arquivos\/ids\/)([0-9]*)(\/.*)/, "$1$2-64-64$3")} />
                         </a>
                     </li>
                 ))}

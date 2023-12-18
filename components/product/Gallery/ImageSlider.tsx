@@ -46,17 +46,17 @@ export default function GallerySlider(props: Props) {
           )
         })}
       </div>
-      <div id={id} class="grid lg:hidden grid-flow-row sm:grid-flow-col">
+      <div id={id} class="grid lg:hidden grid-flow-row">
         {/* Image Slider */}
-        <div class="relative order-1 sm:order-2">
-          <Slider class="carousel carousel-center gap-6 w-screen sm:w-[40vw]">
+        <div class="relative">
+          <Slider class="carousel carousel-center gap-6 w-full">
             {images.map((img, index) => (
               <Slider.Item
                 index={index}
-                class="carousel-item w-full"
+                class="carousel-item w-full flex items-center justify-center"
               >
                 <Image
-                  class="w-full"
+                  class="w-full sm:max-w-[60vw]"
                   sizes="(max-width: 640px) 100vw, 40vw"
                   src={img.url!}
                   alt={img.alternateName}

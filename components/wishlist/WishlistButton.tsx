@@ -24,46 +24,71 @@ function WishlistButton({
   const isUserLoggedIn = Boolean(user.value?.email);
   const inWishlist = Boolean(listItem.value);
 
-  return (
-    <Button
-      class={variant === "icon"
-        ? "btn-circle btn-ghost gap-2"
-        : "btn-primary btn-outline gap-2"}
-      loading={fetching.value}
-      aria-label="Add to wishlist"
-      onClick={async (e) => {
-        e.stopPropagation();
-        e.preventDefault();
+  const clickHandle = async (e) => {
+    e.stopPropagation();
+    e.preventDefault();
 
-        if (!isUserLoggedIn) {
-          window.alert("Please log in before adding to your wishlist");
+    if (!isUserLoggedIn) {
+      window.alert("Please log in before adding to your wishlist");
 
-          return;
+      return;
+    }
+
+    if (loading.value) {
+      return;
+    }
+
+    try {
+      fetching.value = true;
+      inWishlist
+        ? await removeItem({ id: listItem.value!.id }!)
+        : await addItem(item);
+    } finally {
+      fetching.value = false;
+    }
+  }
+
+  if (variant === "icon") {
+    return (
+      <Button
+        class="btn-circle btn-ghost gap-2"
+        loading={fetching.value}
+        aria-label="Add to wishlist"
+        onClick={clickHandle}
+      >
+        <Icon
+          id="Heart"
+          size={24}
+          strokeWidth={2}
+          fill={inWishlist ? "black" : "none"}
+        />
+      </Button>
+    )
+  }
+  
+  if (variant === "full") {
+    return (
+      <button
+        class="flex items-center gap-1 text-sm font-semibold"
+        loading={fetching.value}
+        aria-label="Add to wishlist"
+        onClick={clickHandle}
+      >
+        <Icon
+          id="Heart"
+          size={21}
+          strokeWidth={2}
+          fill={inWishlist ? "black" : "none"}
+        />
+        {inWishlist ? 
+          "Remover da lista de Favoritos" : 
+          "Colocar na lista de Favoritos"
         }
+      </button>
+    )
+  }
 
-        if (loading.value) {
-          return;
-        }
-
-        try {
-          fetching.value = true;
-          inWishlist
-            ? await removeItem({ id: listItem.value!.id }!)
-            : await addItem(item);
-        } finally {
-          fetching.value = false;
-        }
-      }}
-    >
-      <Icon
-        id="Heart"
-        size={24}
-        strokeWidth={2}
-        fill={inWishlist ? "black" : "none"}
-      />
-      {variant === "icon" ? null : inWishlist ? "Remover" : "Favoritar"}
-    </Button>
-  );
+  return null;
 }
 
 export default WishlistButton;

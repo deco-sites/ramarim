@@ -11,7 +11,10 @@ export default function MeasurementChart() {
 
     return (
         <>  
-            <button onClick={openModalHandler}>
+            <button 
+                class="text-sm text-black font-semibold underline"
+                onClick={openModalHandler}
+            >
                 Ver tabela de medidas
             </button>
             <div class={!openModal.value ? "hidden" : ""}>
