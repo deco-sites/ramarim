@@ -8,13 +8,13 @@ import { useSignal } from "@preact/signals";
 import type { ProductListingPage } from "apps/commerce/types.ts";
 
 export type Props =
-  & Pick<ProductListingPage, "filters" | "breadcrumb" | "sortOptions">
+  & Pick<ProductListingPage, "filters" | "breadcrumb" | "sortOptions" | "productsFound" | "Pagination">
   & {
     displayFilter?: boolean;
   };
 
 function SearchControls(
-  { filters, breadcrumb, displayFilter, sortOptions }: Props,
+  { filters, breadcrumb, displayFilter, sortOptions, productsFound, Pagination }: Props,
 ) {
   const open = useSignal(false);
 
@@ -37,28 +37,33 @@ function SearchControls(
             <div class="flex-grow overflow-auto">
               <Filters filters={filters} />
             </div>
+            <div>
+            </div>
           </div>
         </>
       }
     >
-      <div class="flex flex-col justify-between mb-4 p-4 sm:mb-0 sm:p-0 sm:gap-4 sm:flex-row sm:h-[53px] sm:border-b sm:border-base-200">
-        <div class="flex flex-row items-center sm:p-0 mb-2">
+      <div class="flex flex-col justify-between mb-4 p-4 sm:mb-0 sm:p-0 sm:gap-4 sm:flex-row sm:h-[100px]">
+        <div class="flex flex-row ml-2 items-center sm:p-0 my-9">
           <Breadcrumb itemListElement={breadcrumb?.itemListElement} />
         </div>
 
-        <div class="flex flex-row items-center justify-between border-b border-base-200 sm:gap-4 sm:border-none">
+        <div class="flex flex-row items-center justify-between sm:gap-4 sm:border-none my-8">
           <Button
-            class={displayFilter ? "btn-ghost" : "btn-ghost sm:hidden"}
+            class={displayFilter ? "btn-ghost" : "bg-black text-white uppercase sm:hidden font-normal"}
             onClick={() => {
               open.value = true;
             }}
           >
-            Filtrar
-            <Icon id="FilterList" width={16} height={16} />
+            FILTROS
           </Button>
+          {productsFound}
           {sortOptions.length > 0 && <Sort sortOptions={sortOptions} />}
+
         </div>
+       <div class="md:hidden">{Pagination}</div> 
       </div>
+      <div class="hidden md:block">{Pagination}</div> 
     </Drawer>
   );
 }

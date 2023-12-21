@@ -62,10 +62,10 @@ function TabbedProductShelf({
       />
 
       <div class="flex justify-center">
-        <div class="tabs tabs-boxed">
+        <div class="flex items-center justify-center rounded-none p-0 border border-black">
           {tabs.map((tab, index) => (
             <button
-              class={`tab tab-lg ${index === ti ? "tab-active" : ""}`}
+              class={`block h-9 px-5 ${index === ti ? "bg-black text-white" : "bg-white text-black"}`}
               // {...usePartial({ id: sectionId, props: { tabIndex: index } })}
             >
               {tab.title}

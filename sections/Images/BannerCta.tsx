@@ -20,13 +20,14 @@ interface Props {
 
 const Banner = (banner: BannerCTA, index: number) => {
     return (
-        <div key={index} className="flex mt-2 mx-2">
+        <div key={index} className="relative w-full">
             <Image
                 src={banner?.srcDesktop || banner?.srcMobile}
                 alt={banner.alt}
                 loading="lazy"
+                class="w-full h-auto"
             />
-            <div className="absolute">
+            <div className="absolute bottom-0 left-1/2 translate-x-[-50%] pb-5">
                 <div className="flex justify-center">
                     <h3 className="font-normal text-3xl text-white uppercase">
                         {banner?.title}
@@ -36,7 +37,7 @@ const Banner = (banner: BannerCTA, index: number) => {
                     {banner?.buttonText && (
                         <a
                             href={banner.href}
-                            className="mt-5 bg-transparent border border-solid border-white text-base text-white px-14 py-2 md:px-24 uppercase"
+                            className="mt-5 bg-transparent border border-solid border-white text-base text-white px-14 py-2 lg:px-24 uppercase"
                         >
                             {banner.buttonText}
                         </a>
@@ -57,7 +58,7 @@ const BannerCTA = ({
             {/* Mobile */}
             {
                 banners.length > 0 ? (
-                    <div id={id} class="flex sm:hidden relative order-1 sm:order-2">
+                    <div id={id} class="container flex sm:hidden relative order-1 sm:order-2">
                         <Slider class="carousel carousel-center gap-6 w-screen">
                             {banners?.map((banner, index) => (
                                 <Slider.Item
@@ -87,7 +88,7 @@ const BannerCTA = ({
                 ) : null
             }
             {/* Desktop */}
-            <div class="hidden sm:flex container gap-4">
+            <div class="hidden md:flex container gap-4">
                 {banners?.map((banner, index) => (
                     <Banner {...banner} index={index} />
                 ))}

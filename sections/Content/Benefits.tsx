@@ -40,7 +40,7 @@ const DevolutionBenefit = () => {
 
 const MarketplaceBenefit = () => {
   return (
-    <div className={`group flex gap-2 p-5 border border-solid border-black hover:border-white order-3 hover:bg-black text-black hover:text-white`}>
+    <div className={`group flex gap-2 py-[1.3rem] px-[2.2rem] lg:p-5 border border-solid border-black hover:border-white order-3 hover:bg-black text-black hover:text-white`}>
       <div className="flex items-center">
         <Image
           src={asset("./image/store.png")}
@@ -48,9 +48,9 @@ const MarketplaceBenefit = () => {
           className="max-w-full max-h-full object-cover group-hover:invert"
         />
       </div>
-      <div className="flex-auto flex flex-col gap-1">
-        <div className="text-base md:text-lg font-semibold text-black uppercase">VENDA NA RAMARIM</div>
-        <p className="text-xs text-black uppercase">FAÇA PARTE DO NOSSO MARKETPLACE!</p>
+      <div className="flex-auto flex flex-col gap-1 ">
+        <div className="text-base md:text-lg font-semibold uppercase hover:text-white">VENDA NA RAMARIM</div>
+        <p className="text-xs uppercase hover:text-white">FAÇA PARTE DO NOSSO MARKETPLACE!</p>
       </div>
     </div>
   )
@@ -58,7 +58,7 @@ const MarketplaceBenefit = () => {
 
 const StoreBenefit = () => {
   return (
-    <div className={`group flex gap-2 p-5 border border-solid border-black hover:border-white order-4 hover:bg-black text-black hover:text-white`}>
+    <div className={`group flex gap-2 py-[1.3rem] px-[1.1rem] lg:p-5 border border-solid border-black hover:border-white order-4 hover:bg-black text-black hover:text-white`}>
       <div className="flex items-center">
         <Image
           src={asset("./image/pin.png")}
@@ -67,8 +67,8 @@ const StoreBenefit = () => {
         />
       </div>
       <div className="flex-auto flex flex-col gap-1">
-        <div className="text-base md:text-lg font-semibold uppercase">PERTO DE VOCÊ</div>
-        <p className="text-xs uppercase">ENCONTRE O VENDEDOR NA SUA CIDADE!</p>
+        <div className="text-base md:text-lg font-semibold uppercase hover:text-white">PERTO DE VOCÊ</div>
+        <p className="text-xs uppercase hover:text-white">ENCONTRE O VENDEDOR NA SUA CIDADE!</p>
       </div>
     </div>
   )
@@ -77,12 +77,12 @@ const StoreBenefit = () => {
 const Benefits = () => {
   const id = useId();
   return (
-    <div id={id} className="container m-auto flex flex-col items-center gap-3 mx-[10px] md:flex-row md:gap-11 justify-center py-3 my-14">
+    <div id={id} className="container my-8 flex flex-col items-center justify-center py-3 gap-3 lg:mb-8 md:m-auto mx-[10px] md:flex-row md:gap-11 ">
       <InstallmentBenefit />
       <DevolutionBenefit />
       <MarketplaceBenefit />
       <StoreBenefit />
-    </div>
+      </div>
   );
 };
 

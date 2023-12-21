@@ -50,6 +50,8 @@ interface Props {
 
   // layout?: Layout;
   platform?: Platform;
+
+  theme?: "dark" | "light";
 }
 
 const relative = (url: string) => {
@@ -61,7 +63,7 @@ const WIDTH = 270;
 const HEIGHT = 225;
 
 function ProductCard(
-  { product, preload, itemListName, platform, index }: Props,
+  { product, preload, itemListName, platform, theme = "dark", index }: Props,
 ) {
   const {
     url,
@@ -95,7 +97,7 @@ function ProductCard(
     <a
       href={url && relative(url)}
       aria-label="view product"
-      class="btn btn-block bg-transparent border border-solid border-black rounded-none hover:bg-transparent uppercase text-base font-normal text-black"
+      class={`btn btn-block bg-transparent border border-solid rounded-none hover:bg-transparent uppercase text-base font-normal text-black ${theme === "dark" ? "border-black text-black" : "border-white text-white"}`}
     >
       Ver produto
     </a>
